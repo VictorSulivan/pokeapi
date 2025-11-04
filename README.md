@@ -68,4 +68,33 @@ Ensuite, ouvrez l’URL affichée (par défaut `http://localhost:5173`).
 - Les appels API passent par un proxy Vercel: `/api/pokemon/:id` → `https://pokeapi.co/api/v2/pokemon/:id`.
 - Les en-têtes de sécurité (CSP, HSTS, etc.) sont définis dans `vercel.json`.
 
+## CI/CD avec GitHub Actions + Vercel
+
+Un workflow est fourni: `.github/workflows/vercel-deploy.yml`.
+
+### Secrets GitHub requis
+- `VERCEL_TOKEN`: token API personnel Vercel (Account Settings → Tokens)
+- `VERCEL_ORG_ID`: ID d’organisation Vercel
+- `VERCEL_PROJECT_ID`: ID du projet Vercel
+
+Ajoutez ces secrets dans GitHub: Settings → Secrets and variables → Actions → New repository secret.
+
+### Comportement du workflow
+- Pull Request vers `main`: build local (`npm ci && npm run build`) puis déploiement PREVIEW sur Vercel.
+- Push sur `main`: build local puis déploiement PRODUCTION sur Vercel.
+
+Le workflow utilise Vercel CLI:
+- `vercel pull` pour récupérer la config d’environnement (preview/prod)
+- `vercel deploy --prebuilt` pour déployer l’artefact
+
+### Configuration Vercel recommandée (Dashboard)
+- Framework: Vite (auto)
+- Install Command: `npm ci`
+- Build Command: `npm run build`
+- Output Directory: `dist`
+- Node.js Version: 20 (ou 18)
+- Environment Variables: (aucune nécessaire par défaut)
+
+Assurez-vous que le repo est lié au projet Vercel (Import Project → sélectionner le repo). 
+
 
