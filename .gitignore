@@ -1,0 +1,39 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build output
+/dist/
+/.vercel/
+.vite/
+.temp/
+cache/
+
+# Env
+.env
+.env.*
+!.env.example
+
+# Editors/OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Logs
+logs/
+*.log
+
+# Coverage
+coverage/
+
+# Misc
+*.local
+*.swp
+*.swo
+
+
